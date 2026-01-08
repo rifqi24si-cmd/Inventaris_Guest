@@ -241,14 +241,15 @@
                                 {{-- Menampilkan Nama Kategori melalui Relasi --}}
                                 <span class="category">{{ $a->kategori->nama }}</span>
                                 <h4 title="{{ $a->nama_aset }}">{{ Str::limit($a->nama_aset, 15) }}</h4>
-                                
+
                                 <p style="color: #aaa; font-size: 13px; margin-bottom: 15px; min-height: 40px;">
                                     <i class="fa fa-info-circle" style="color: #ee626b;"></i> Kondisi: {{ $a->kondisi }}<br>
                                     <i class="fa fa-calendar" style="color: #ee626b;"></i> {{ $a->tgl_perolehan }}
                                 </p>
 
-                                <div class="action-buttons-wrapper d-flex justify-content-center align-items-center gap-2 mt-3 pt-3" style="border-top: 1px solid #444;">
-                                    
+                                <div class="action-buttons-wrapper d-flex justify-content-center align-items-center gap-2 mt-3 pt-3"
+                                    style="border-top: 1px solid #444;">
+
                                     <a href="{{ route('aset.show', $a->aset_id) }}" class="btn-round btn-detail" title="Detail">
                                         <i class="fa fa-eye"></i>
                                     </a>
@@ -313,15 +314,17 @@
                                 {{-- Menampilkan Nama Aset yang menempati lokasi ini --}}
                                 <span class="category">{{ $l->aset->nama_aset }}</span>
                                 <h4 title="{{ $l->lokasi_text }}">{{ Str::limit($l->lokasi_text, 15) }}</h4>
-                                
+
                                 <p style="color: #aaa; font-size: 13px; margin-bottom: 15px; min-height: 40px;">
-                                    <i class="fa fa-map-marker" style="color: #ee626b;"></i> 
+                                    <i class="fa fa-map-marker" style="color: #ee626b;"></i>
                                     {{ $l->keterangan ?: 'Tidak ada keterangan tambahan.' }}
                                 </p>
 
-                                <div class="action-buttons-wrapper d-flex justify-content-center align-items-center gap-2 mt-3 pt-3" style="border-top: 1px solid #444;">
-                                    
-                                    <a href="{{ route('lokasi.show', $l->lokasi_id) }}" class="btn-round btn-detail" title="Detail">
+                                <div class="action-buttons-wrapper d-flex justify-content-center align-items-center gap-2 mt-3 pt-3"
+                                    style="border-top: 1px solid #444;">
+
+                                    <a href="{{ route('lokasi.show', $l->lokasi_id) }}" class="btn-round btn-detail"
+                                        title="Detail">
                                         <i class="fa fa-eye"></i>
                                     </a>
 
@@ -388,23 +391,27 @@
                                 <h4 title="{{ $p->tindakan }}">{{ Str::limit($p->tindakan, 20) }}</h4>
 
                                 <p style="color: #666; font-size: 13px; min-height: 40px;">
-                                    <i class="fa fa-calendar" style="color: #ee626b;"></i> {{ \Carbon\Carbon::parse($p->tanggal)->format('d/m/Y') }}<br>
+                                    <i class="fa fa-calendar" style="color: #ee626b;"></i>
+                                    {{ \Carbon\Carbon::parse($p->tanggal)->format('d/m/Y') }}<br>
                                     <i class="fa fa-user" style="color: #ee626b;"></i> Pelaksana: {{ $p->pelaksana }}
                                 </p>
 
                                 <div class="action-buttons-wrapper d-flex flex-row justify-content-center align-items-center gap-2"
                                     style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px;">
 
-                                    <a href="{{ route('pemeliharaan.show', $p->pemeliharaan_id) }}" class="btn-round btn-view" title="Detail">
+                                    <a href="{{ route('pemeliharaan.show', $p->pemeliharaan_id) }}" class="btn-round btn-view"
+                                        title="Detail">
                                         <i class="fa fa-eye"></i>
                                     </a>
 
-                                    <a href="{{ route('pemeliharaan.edit', $p->pemeliharaan_id) }}" class="btn-round btn-edit" title="Edit">
+                                    <a href="{{ route('pemeliharaan.edit', $p->pemeliharaan_id) }}" class="btn-round btn-edit"
+                                        title="Edit">
                                         <i class="fa fa-pencil"></i>
                                     </a>
 
                                     <form action="{{ route('pemeliharaan.destroy', $p->pemeliharaan_id) }}" method="POST"
-                                        onsubmit="return confirm('Hapus log pemeliharaan ini?')" style="display: inline-block; margin: 0;">
+                                        onsubmit="return confirm('Hapus log pemeliharaan ini?')"
+                                        style="display: inline-block; margin: 0;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn-round btn-delete" title="Hapus">
@@ -421,6 +428,82 @@
                             <i class="fa fa-wrench" style="font-size: 50px; color: #ee626b; margin-bottom: 20px;"></i>
                             <h4 style="color: #fff;">Belum ada catatan pemeliharaan</h4>
                             <p style="color: #aaa;">Klik "+ Catat Pemeliharaan" untuk mendokumentasikan perbaikan aset.</p>
+                        </div>
+                    </div>
+                @endforelse
+            </div>
+        </div>
+    </div>
+
+    <div class="section trending">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="section-heading">
+                        <h6>Movement Tracking</h6>
+                        <h2>Mutasi Aset</h2>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="main-button">
+                        <a href="{{ route('mutasi.create') }}">+ Catat Mutasi Baru</a>
+                    </div>
+                </div>
+
+                @forelse($mutasis as $m)
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="item">
+                            <div class="thumb">
+                                <a href="{{ route('mutasi.show', $m->mutasi_id) }}">
+                                    {{-- Placeholder gambar bertema perpindahan/box --}}
+                                    <img src="{{ asset('assets/images/trending-02.jpg') }}" alt="">
+                                </a>
+                                {{-- Menampilkan Tanggal Mutasi sebagai badge di pojok gambar --}}
+                                <span class="price" style="background-color: #ee626b; font-size: 11px;">
+                                    {{ \Carbon\Carbon::parse($m->tanggal)->format('d/m/Y') }}
+                                </span>
+                            </div>
+                            <div class="down-content">
+                                {{-- Menampilkan Nama Aset yang mengalami mutasi --}}
+                                <span class="category">{{ $m->aset->nama_aset }}</span>
+                                <h4 title="{{ $m->jenis_mutasi }}">{{ Str::limit($m->jenis_mutasi, 15) }}</h4>
+
+                                {{-- Keterangan Mutasi --}}
+                                <p style="color: #aaa; font-size: 13px; margin-bottom: 15px; min-height: 40px;">
+                                    <i class="fa fa-exchange" style="color: #ee626b;"></i>
+                                    {{ $m->keterangan ?: 'Tidak ada catatan mutasi.' }}
+                                </p>
+
+                                <div class="action-buttons-wrapper d-flex justify-content-center align-items-center gap-2 mt-3 pt-3"
+                                    style="border-top: 1px solid #444;">
+
+                                    <a href="{{ route('mutasi.show', $m->mutasi_id) }}" class="btn-round btn-detail"
+                                        title="Detail">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+
+                                    <a href="{{ route('mutasi.edit', $m->mutasi_id) }}" class="btn-round btn-edit" title="Edit">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+
+                                    <form action="{{ route('mutasi.destroy', $m->mutasi_id) }}" method="POST"
+                                        onsubmit="return confirm('Hapus catatan mutasi ini?')" class="m-0 d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn-round btn-delete" title="Hapus">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-lg-12">
+                        <div class="item text-center" style="padding: 50px; background-color: #2a2a2a; border-radius: 25px;">
+                            <i class="fa fa-history" style="font-size: 50px; color: #ee626b; margin-bottom: 20px;"></i>
+                            <h4 style="color: #fff;">Belum ada riwayat mutasi</h4>
+                            <p style="color: #aaa;">Klik "+ Catat Mutasi Baru" untuk mencatat pergerakan aset.</p>
                         </div>
                     </div>
                 @endforelse

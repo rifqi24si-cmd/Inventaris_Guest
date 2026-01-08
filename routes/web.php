@@ -7,6 +7,7 @@ use App\Http\Controllers\KategoriAsetController;
 use App\Http\Controllers\AsetController;
 use App\Http\Controllers\LokasiAsetController;
 use App\Http\Controllers\PemeliharaanAsetController;
+use App\Http\Controllers\MutasiAsetController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -30,3 +31,4 @@ Route::resource('kategori', KategoriAsetController::class);
 Route::resource('aset', AsetController::class);
 Route::resource('lokasi', LokasiAsetController::class);
 Route::resource('pemeliharaan', PemeliharaanAsetController::class);
+Route::resource('mutasi', MutasiAsetController::class);

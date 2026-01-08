@@ -7,6 +7,7 @@ use App\Models\KategoriAset;
 use App\Models\Aset;
 use App\Models\LokasiAset;
 use App\Models\PemeliharaanAset;
+use App\Models\MutasiAset;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -18,7 +19,8 @@ class DashboardController extends Controller
         $asets = Aset::with('kategori')->latest()->get();
         $lokasis = LokasiAset::with('aset')->latest()->get();
         $pemeliharaans = PemeliharaanAset::with('aset')->latest()->get();
+        $mutasis = MutasiAset::with('aset')->latest()->get();
 
-        return view('dashboard', compact('wargas', 'kategoris', 'asets', 'lokasis', 'pemeliharaans'));
+        return view('dashboard', compact('wargas', 'kategoris', 'asets', 'lokasis', 'pemeliharaans', 'mutasis'));
     }
 }
