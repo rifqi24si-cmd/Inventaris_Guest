@@ -107,7 +107,7 @@
         padding: 5px 10px !important;
     }
 
-    .btn-action {
+    btn-action {
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -157,5 +157,41 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+
+    .action-buttons-wrapper {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 10px !important; /* Jarak antar tombol */
+    }
+
+    /* Ukuran tombol bulat agar presisi */
+    .btn-round {
+        width: 35px !important;
+        height: 35px !important;
+        line-height: 35px !important; /* Menjaga icon di tengah */
+        text-align: center;
+        display: inline-block;
+        border-radius: 50% !important;
+        color: white !important;
+        border: none !important;
+        padding: 0 !important;
+        transition: 0.3s;
+    }
+
+    .btn-view { background-color: #00bcd4 !important; }
+    .btn-edit { background-color: #f39c12 !important; }
+    .btn-delete { background-color: #ee626b !important; }
+
+    .btn-round:hover {
+        transform: translateY(-3px);
+        opacity: 0.9;
+    }
+
+    .btn-round i {
+        font-size: 14px;
+        vertical-align: middle;
     }
 </style>
