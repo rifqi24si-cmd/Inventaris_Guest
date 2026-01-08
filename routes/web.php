@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\WargaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KategoriAsetController;
+use App\Http\Controllers\AsetController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -24,3 +25,4 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::resource('warga', WargaController::class);
 Route::resource('kategori', KategoriAsetController::class);
+Route::resource('aset', AsetController::class);

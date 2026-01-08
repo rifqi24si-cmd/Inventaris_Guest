@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Warga;
 use App\Models\KategoriAset;
+use App\Models\Aset;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -12,6 +13,8 @@ class DashboardController extends Controller
     {
         $wargas = Warga::all();
         $kategoris = KategoriAset::latest()->get();
-        return view('dashboard', compact('wargas', 'kategoris'));
+        $asets = Aset::with('kategori')->latest()->get();
+
+        return view('dashboard', compact('wargas', 'kategoris', 'asets'));
     }
 }

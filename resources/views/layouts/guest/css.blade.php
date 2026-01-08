@@ -164,14 +164,16 @@
         flex-direction: row !important;
         justify-content: center !important;
         align-items: center !important;
-        gap: 10px !important; /* Jarak antar tombol */
+        gap: 10px !important;
+        /* Jarak antar tombol */
     }
 
     /* Ukuran tombol bulat agar presisi */
     .btn-round {
         width: 35px !important;
         height: 35px !important;
-        line-height: 35px !important; /* Menjaga icon di tengah */
+        line-height: 35px !important;
+        /* Menjaga icon di tengah */
         text-align: center;
         display: inline-block;
         border-radius: 50% !important;
@@ -181,9 +183,17 @@
         transition: 0.3s;
     }
 
-    .btn-view { background-color: #00bcd4 !important; }
-    .btn-edit { background-color: #f39c12 !important; }
-    .btn-delete { background-color: #ee626b !important; }
+    .btn-view {
+        background-color: #00bcd4 !important;
+    }
+
+    .btn-edit {
+        background-color: #f39c12 !important;
+    }
+
+    .btn-delete {
+        background-color: #ee626b !important;
+    }
 
     .btn-round:hover {
         transform: translateY(-3px);
@@ -193,5 +203,41 @@
     .btn-round i {
         font-size: 14px;
         vertical-align: middle;
+    }
+
+    /* Styling tombol agar bulat sempurna dan sejajar */
+    .btn-round {
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        color: #fff !important;
+        transition: 0.3s;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .btn-detail {
+        background-color: #00bcd4;
+    }
+
+    .btn-edit {
+        background-color: #f39c12;
+    }
+
+    .btn-delete {
+        background-color: #ee626b;
+    }
+
+    .btn-round:hover {
+        transform: scale(1.1);
+        opacity: 0.9;
+    }
+
+    .btn-round i {
+        font-size: 14px;
     }
 </style>

@@ -160,42 +160,46 @@
 
                 @forelse($kategoris as $k)
                     <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
-                    <div class="item">
-                        <div class="thumb">
-                            <a href="{{ route('kategori.show', $k->kategori_id) }}">
-                                <img src="{{ asset('assets/images/top-game-01.jpg') }}" alt="">
-                            </a>
-                            <span class="price" style="background-color: #ee626b; font-size: 12px;">{{ $k->kode }}</span>
-                        </div>
-                        <div class="down-content">
-                            <span class="category">Kategori Aset</span>
-                            <h4 title="{{ $k->nama }}">{{ Str::limit($k->nama, 20) }}</h4>
-                            
-                            <p style="color: #666; font-size: 13px; min-height: 40px;">
-                                {{ Str::limit($k->deskripsi, 45) }}
-                            </p>
-
-                            <div class="action-buttons-wrapper d-flex flex-row justify-content-center align-items-center gap-2" style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px;">
-    
-                                <a href="{{ route('kategori.show', $k->kategori_id) }}" class="btn-round btn-view" title="Detail">
-                                    <i class="fa fa-eye"></i>
+                        <div class="item">
+                            <div class="thumb">
+                                <a href="{{ route('kategori.show', $k->kategori_id) }}">
+                                    <img src="{{ asset('assets/images/top-game-01.jpg') }}" alt="">
                                 </a>
+                                <span class="price" style="background-color: #ee626b; font-size: 12px;">{{ $k->kode }}</span>
+                            </div>
+                            <div class="down-content">
+                                <span class="category">Kategori Aset</span>
+                                <h4 title="{{ $k->nama }}">{{ Str::limit($k->nama, 20) }}</h4>
 
-                                <a href="{{ route('kategori.edit', $k->kategori_id) }}" class="btn-round btn-edit" title="Edit">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
+                                <p style="color: #666; font-size: 13px; min-height: 40px;">
+                                    {{ Str::limit($k->deskripsi, 45) }}
+                                </p>
 
-                                <form action="{{ route('kategori.destroy', $k->kategori_id) }}" method="POST" onsubmit="return confirm('Yakin hapus?')" style="display: inline-block; margin: 0;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn-round btn-delete" title="Hapus">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                </form>
+                                <div class="action-buttons-wrapper d-flex flex-row justify-content-center align-items-center gap-2"
+                                    style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px;">
+
+                                    <a href="{{ route('kategori.show', $k->kategori_id) }}" class="btn-round btn-view"
+                                        title="Detail">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+
+                                    <a href="{{ route('kategori.edit', $k->kategori_id) }}" class="btn-round btn-edit"
+                                        title="Edit">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+
+                                    <form action="{{ route('kategori.destroy', $k->kategori_id) }}" method="POST"
+                                        onsubmit="return confirm('Yakin hapus?')" style="display: inline-block; margin: 0;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn-round btn-delete" title="Hapus">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 @empty
                     <div class="col-lg-12">
                         <div class="item text-center" style="padding: 50px; background-color: #2a2a2a; border-radius: 25px;">
@@ -208,59 +212,75 @@
             </div>
         </div>
     </div>
-
-    <div class="section categories">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="section-heading">
-                        <h6>Categories</h6>
-                        <h2>Top Categories</h2>
-                    </div>
-                </div>
-                <div class="col-lg col-sm-6 col-xs-12">
-                    <div class="item">
-                        <h4>Action</h4>
-                        <div class="thumb">
-                            <a href="product-details.html"><img src="assets/images/categories-01.jpg" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg col-sm-6 col-xs-12">
-                    <div class="item">
-                        <h4>Action</h4>
-                        <div class="thumb">
-                            <a href="product-details.html"><img src="assets/images/categories-05.jpg" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg col-sm-6 col-xs-12">
-                    <div class="item">
-                        <h4>Action</h4>
-                        <div class="thumb">
-                            <a href="product-details.html"><img src="assets/images/categories-03.jpg" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg col-sm-6 col-xs-12">
-                    <div class="item">
-                        <h4>Action</h4>
-                        <div class="thumb">
-                            <a href="product-details.html"><img src="assets/images/categories-04.jpg" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg col-sm-6 col-xs-12">
-                    <div class="item">
-                        <h4>Action</h4>
-                        <div class="thumb">
-                            <a href="product-details.html"><img src="assets/images/categories-05.jpg" alt=""></a>
-                        </div>
-                    </div>
+    <div class="section trending">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="section-heading">
+                    <h6>Asset Management</h6>
+                    <h2>Daftar Aset</h2>
                 </div>
             </div>
+            <div class="col-lg-6">
+                <div class="main-button">
+                    <a href="{{ route('aset.create') }}">+ Tambah Aset</a>
+                </div>
+            </div>
+
+            @forelse($asets as $a)
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="item">
+                        <div class="thumb">
+                            <a href="{{ route('aset.show', $a->aset_id) }}">
+                                {{-- Gambar disesuaikan dengan tema game --}}
+                                <img src="{{ asset('assets/images/trending-02.jpg') }}" alt="">
+                            </a>
+                            <span class="price" style="background-color: #ee626b;">{{ $a->kode_aset }}</span>
+                        </div>
+                        <div class="down-content">
+                            {{-- Menampilkan Nama Kategori melalui Relasi --}}
+                            <span class="category">{{ $a->kategori->nama }}</span>
+                            <h4 title="{{ $a->nama_aset }}">{{ Str::limit($a->nama_aset, 15) }}</h4>
+                            
+                            <p style="color: #aaa; font-size: 13px; margin-bottom: 15px; min-height: 40px;">
+                                <i class="fa fa-info-circle" style="color: #ee626b;"></i> Kondisi: {{ $a->kondisi }}<br>
+                                <i class="fa fa-calendar" style="color: #ee626b;"></i> {{ $a->tgl_perolehan }}
+                            </p>
+
+                            <div class="action-buttons-wrapper d-flex justify-content-center align-items-center gap-2 mt-3 pt-3" style="border-top: 1px solid #444;">
+                                
+                                <a href="{{ route('aset.show', $a->aset_id) }}" class="btn-round btn-detail" title="Detail">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+
+                                <a href="{{ route('aset.edit', $a->aset_id) }}" class="btn-round btn-edit" title="Edit">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+
+                                <form action="{{ route('aset.destroy', $a->aset_id) }}" method="POST"
+                                    onsubmit="return confirm('Yakin hapus aset ini?')" class="m-0 d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn-round btn-delete" title="Hapus">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <div class="col-lg-12">
+                    <div class="item text-center" style="padding: 50px; background-color: #2a2a2a; border-radius: 25px;">
+                        <i class="fa fa-box-open" style="font-size: 50px; color: #ee626b; margin-bottom: 20px;"></i>
+                        <h4 style="color: #fff;">Belum ada data aset</h4>
+                        <p style="color: #aaa;">Klik tombol "+ Tambah Aset" untuk memasukkan barang baru.</p>
+                    </div>
+                </div>
+            @endforelse
         </div>
     </div>
+</div>
 
     <div class="section cta">
         <div class="container">
