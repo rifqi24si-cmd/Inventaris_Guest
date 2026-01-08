@@ -213,74 +213,146 @@
         </div>
     </div>
     <div class="section trending">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="section-heading">
-                    <h6>Asset Management</h6>
-                    <h2>Daftar Aset</h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="section-heading">
+                        <h6>Asset Management</h6>
+                        <h2>Daftar Aset</h2>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="main-button">
-                    <a href="{{ route('aset.create') }}">+ Tambah Aset</a>
+                <div class="col-lg-6">
+                    <div class="main-button">
+                        <a href="{{ route('aset.create') }}">+ Tambah Aset</a>
+                    </div>
                 </div>
-            </div>
 
-            @forelse($asets as $a)
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="item">
-                        <div class="thumb">
-                            <a href="{{ route('aset.show', $a->aset_id) }}">
-                                {{-- Gambar disesuaikan dengan tema game --}}
-                                <img src="{{ asset('assets/images/trending-02.jpg') }}" alt="">
-                            </a>
-                            <span class="price" style="background-color: #ee626b;">{{ $a->kode_aset }}</span>
-                        </div>
-                        <div class="down-content">
-                            {{-- Menampilkan Nama Kategori melalui Relasi --}}
-                            <span class="category">{{ $a->kategori->nama }}</span>
-                            <h4 title="{{ $a->nama_aset }}">{{ Str::limit($a->nama_aset, 15) }}</h4>
-                            
-                            <p style="color: #aaa; font-size: 13px; margin-bottom: 15px; min-height: 40px;">
-                                <i class="fa fa-info-circle" style="color: #ee626b;"></i> Kondisi: {{ $a->kondisi }}<br>
-                                <i class="fa fa-calendar" style="color: #ee626b;"></i> {{ $a->tgl_perolehan }}
-                            </p>
-
-                            <div class="action-buttons-wrapper d-flex justify-content-center align-items-center gap-2 mt-3 pt-3" style="border-top: 1px solid #444;">
+                @forelse($asets as $a)
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="item">
+                            <div class="thumb">
+                                <a href="{{ route('aset.show', $a->aset_id) }}">
+                                    {{-- Gambar disesuaikan dengan tema game --}}
+                                    <img src="{{ asset('assets/images/trending-02.jpg') }}" alt="">
+                                </a>
+                                <span class="price" style="background-color: #ee626b;">{{ $a->kode_aset }}</span>
+                            </div>
+                            <div class="down-content">
+                                {{-- Menampilkan Nama Kategori melalui Relasi --}}
+                                <span class="category">{{ $a->kategori->nama }}</span>
+                                <h4 title="{{ $a->nama_aset }}">{{ Str::limit($a->nama_aset, 15) }}</h4>
                                 
-                                <a href="{{ route('aset.show', $a->aset_id) }}" class="btn-round btn-detail" title="Detail">
-                                    <i class="fa fa-eye"></i>
-                                </a>
+                                <p style="color: #aaa; font-size: 13px; margin-bottom: 15px; min-height: 40px;">
+                                    <i class="fa fa-info-circle" style="color: #ee626b;"></i> Kondisi: {{ $a->kondisi }}<br>
+                                    <i class="fa fa-calendar" style="color: #ee626b;"></i> {{ $a->tgl_perolehan }}
+                                </p>
 
-                                <a href="{{ route('aset.edit', $a->aset_id) }}" class="btn-round btn-edit" title="Edit">
-                                    <i class="fa fa-edit"></i>
-                                </a>
+                                <div class="action-buttons-wrapper d-flex justify-content-center align-items-center gap-2 mt-3 pt-3" style="border-top: 1px solid #444;">
+                                    
+                                    <a href="{{ route('aset.show', $a->aset_id) }}" class="btn-round btn-detail" title="Detail">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
 
-                                <form action="{{ route('aset.destroy', $a->aset_id) }}" method="POST"
-                                    onsubmit="return confirm('Yakin hapus aset ini?')" class="m-0 d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn-round btn-delete" title="Hapus">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                </form>
+                                    <a href="{{ route('aset.edit', $a->aset_id) }}" class="btn-round btn-edit" title="Edit">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+
+                                    <form action="{{ route('aset.destroy', $a->aset_id) }}" method="POST"
+                                        onsubmit="return confirm('Yakin hapus aset ini?')" class="m-0 d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn-round btn-delete" title="Hapus">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            @empty
-                <div class="col-lg-12">
-                    <div class="item text-center" style="padding: 50px; background-color: #2a2a2a; border-radius: 25px;">
-                        <i class="fa fa-box-open" style="font-size: 50px; color: #ee626b; margin-bottom: 20px;"></i>
-                        <h4 style="color: #fff;">Belum ada data aset</h4>
-                        <p style="color: #aaa;">Klik tombol "+ Tambah Aset" untuk memasukkan barang baru.</p>
+                @empty
+                    <div class="col-lg-12">
+                        <div class="item text-center" style="padding: 50px; background-color: #2a2a2a; border-radius: 25px;">
+                            <i class="fa fa-box-open" style="font-size: 50px; color: #ee626b; margin-bottom: 20px;"></i>
+                            <h4 style="color: #fff;">Belum ada data aset</h4>
+                            <p style="color: #aaa;">Klik tombol "+ Tambah Aset" untuk memasukkan barang baru.</p>
+                        </div>
                     </div>
-                </div>
-            @endforelse
+                @endforelse
+            </div>
         </div>
     </div>
-</div>
+
+    <div class="section trending">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="section-heading">
+                        <h6>Tracking System</h6>
+                        <h2>Lokasi Aset</h2>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="main-button">
+                        <a href="{{ route('lokasi.create') }}">+ Plot Lokasi Baru</a>
+                    </div>
+                </div>
+
+                @forelse($lokasis as $l)
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="item">
+                            <div class="thumb">
+                                <a href="{{ route('lokasi.show', $l->lokasi_id) }}">
+                                    <img src="{{ asset('assets/images/trending-03.jpg') }}" alt="">
+                                </a>
+                                {{-- Menampilkan RT/RW sebagai badge di pojok gambar --}}
+                                <span class="price" style="background-color: #ee626b; font-size: 11px;">
+                                    RT {{ $l->rt }} / RW {{ $l->rw }}
+                                </span>
+                            </div>
+                            <div class="down-content">
+                                {{-- Menampilkan Nama Aset yang menempati lokasi ini --}}
+                                <span class="category">{{ $l->aset->nama_aset }}</span>
+                                <h4 title="{{ $l->lokasi_text }}">{{ Str::limit($l->lokasi_text, 15) }}</h4>
+                                
+                                <p style="color: #aaa; font-size: 13px; margin-bottom: 15px; min-height: 40px;">
+                                    <i class="fa fa-map-marker" style="color: #ee626b;"></i> 
+                                    {{ $l->keterangan ?: 'Tidak ada keterangan tambahan.' }}
+                                </p>
+
+                                <div class="action-buttons-wrapper d-flex justify-content-center align-items-center gap-2 mt-3 pt-3" style="border-top: 1px solid #444;">
+                                    
+                                    <a href="{{ route('lokasi.show', $l->lokasi_id) }}" class="btn-round btn-detail" title="Detail">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+
+                                    <a href="{{ route('lokasi.edit', $l->lokasi_id) }}" class="btn-round btn-edit" title="Edit">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+
+                                    <form action="{{ route('lokasi.destroy', $l->lokasi_id) }}" method="POST"
+                                        onsubmit="return confirm('Hapus data lokasi ini?')" class="m-0 d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn-round btn-delete" title="Hapus">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-lg-12">
+                        <div class="item text-center" style="padding: 50px; background-color: #2a2a2a; border-radius: 25px;">
+                            <i class="fa fa-map-signs" style="font-size: 50px; color: #ee626b; margin-bottom: 20px;"></i>
+                            <h4 style="color: #fff;">Belum ada titik lokasi</h4>
+                            <p style="color: #aaa;">Klik "+ Plot Lokasi Baru" untuk menentukan posisi aset.</p>
+                        </div>
+                    </div>
+                @endforelse
+            </div>
+        </div>
+    </div>
 
     <div class="section cta">
         <div class="container">
