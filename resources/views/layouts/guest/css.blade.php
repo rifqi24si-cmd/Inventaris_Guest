@@ -240,4 +240,111 @@
     .btn-round i {
         font-size: 14px;
     }
+
+    .social-btn {
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f8f9fa;
+        color: #444;
+        border-radius: 10px;
+        text-decoration: none;
+        transition: 0.3s;
+        border: 1px solid #eee;
+    }
+
+    .social-btn:hover {
+        background: #0d6efd;
+        color: #fff;
+        transform: translateY(-3px);
+    }
+
+    /* CSS Khusus untuk Layout Modern */
+    .social-icon-modern {
+        width: 45px;
+        height: 45px;
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .social-icon-modern:hover {
+        background: white;
+        color: #0d6efd;
+        transform: scale(1.1);
+    }
+
+    .info-grid-modern {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .info-item-modern {
+        background: #fcfcfc;
+        border: 1px solid #f0f0f0;
+        padding: 20px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        transition: all 0.3s ease;
+    }
+
+    .info-item-modern:hover {
+        border-color: #0d6efd;
+        background: #fff;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .info-item-modern.full-width {
+        grid-column: span 2;
+    }
+
+    .info-item-modern .icon-wrap {
+        width: 50px;
+        height: 50px;
+        background: #fff;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #0d6efd;
+        font-size: 1.2rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        margin-right: 15px;
+    }
+
+    .info-item-modern .text-wrap small {
+        display: block;
+        color: #adb5bd;
+        text-transform: uppercase;
+        font-size: 10px;
+        letter-spacing: 1px;
+        font-weight: 700;
+    }
+
+    .info-item-modern .text-wrap strong {
+        color: #2d3436;
+        font-size: 1.1rem;
+    }
+
+    @media (max-width: 991px) {
+
+        .info-item-modern.full-width,
+        .info-grid-modern {
+            grid-template-columns: 1fr;
+        }
+
+        .info-item-modern.full-width {
+            grid-column: span 1;
+        }
+    }
 </style>

@@ -8,11 +8,12 @@ use App\Http\Controllers\AsetController;
 use App\Http\Controllers\LokasiAsetController;
 use App\Http\Controllers\PemeliharaanAsetController;
 use App\Http\Controllers\MutasiAsetController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('dashboard');
-// });
+Route::get('/tentang', function () {
+    return view('pages.tentang');
+});
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 // Login
@@ -26,6 +27,7 @@ Route::post('/register', [AuthController::class, 'register']);
 // Logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::resource('user', UserController::class);
 Route::resource('warga', WargaController::class);
 Route::resource('kategori', KategoriAsetController::class);
 Route::resource('aset', AsetController::class);

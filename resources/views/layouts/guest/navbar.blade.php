@@ -6,13 +6,13 @@
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
                     <a href="index.html" class="logo">
-                        <img src="{{ asset('assets/images/logo.png') }}" alt="" style="width: 158px;">
+                        <img src="{{ asset('assets/images/logo.jpg') }}" alt="" style="width: 50px;" class="rounded">
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li><a href="{{ url('/') }}" class="{{ Request::is('/') ? 'active' : '' }}">Home</a></li>
-                        <li><a href="/shop" class="{{ Request::is('shop*') ? 'active' : '' }}">Our Shop</a></li>
+                        <li><a href="{{ url('/') }}" class="{{ Request::is('/') ? 'active' : '' }}">Beranda</a></li>
+                        <li><a href="/tentang" class="{{ Request::is('tentang*') ? 'active' : '' }}">Tentang</a></li>
                         
                         @auth
                             <li class="dropdown-container">

@@ -1,78 +1,113 @@
 @extends('layouts.guest.app')
 @section('content')
     <div class="main-banner">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 align-self-center">
-                    <div class="caption header-text">
-                        <h6>Welcome to lugx</h6>
-                        <h2>BEST GAMING SITE EVER!</h2>
-                        <p>LUGX Gaming is free Bootstrap 5 HTML CSS website template for your gaming websites. You can
-                            download and use this layout for commercial purposes. Please tell your friends about
-                            TemplateMo.</p>
-                        <div class="search-input">
-                            <form id="search" action="#">
-                                <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword"
-                                    onkeypress="handle" />
-                                <button role="button">Search Now</button>
-                            </form>
-                        </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 align-self-center">
+                <div class="caption header-text">
+                    <h6>Sistem Monitoring & Inventaris</h6>
+                    <h2>KELOLA ASET JADI LEBIH MUDAH!</h2>
+                    <p>
+                        <strong>Asset-Track</strong> adalah solusi modern untuk memantau riwayat pemeliharaan, 
+                        perpindahan lokasi, dan mutasi aset secara real-time. Tingkatkan efisiensi manajemen 
+                        inventaris Anda dengan data yang akurat dan terintegrasi.
+                    </p>
+                    <div class="search-input">
+                        <form id="search" action="{{ route('aset.index') }}" method="GET">
+                            <input type="text" placeholder="Cari Nama atau Kode Aset..." id='searchText' name="search" />
+                            <button role="button">Cari Aset</button>
+                        </form>
                     </div>
                 </div>
-                <div class="col-lg-4 offset-lg-2">
-                    <div class="right-image">
-                        <img src="assets/images/banner-image.jpg" alt="">
-                        <span class="price">$22</span>
-                        <span class="offer">-40%</span>
-                    </div>
+            </div>
+            <div class="col-lg-4 offset-lg-2">
+                <div class="right-image">
+                    {{-- Menggunakan gambar bertema kantor/gudang/teknologi --}}
+                    <img src="{{ asset('assets/images/hp.jpg') }}" alt="Asset Management">
+                    
+                    {{-- Mengubah badge harga menjadi statistik ringkas --}}
+                    <span class="price">Aset: {{ $totalAset ?? '0' }}</span>
+                    <span class="offer">Aktif</span>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="features">
+    <div class="section trending">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <a href="#">
-                        <div class="item">
-                            <div class="image">
-                                <img src="assets/images/featured-01.png" alt="" style="max-width: 44px;">
-                            </div>
-                            <h4>Free Storage</h4>
-                        </div>
-                    </a>
+                <div class="col-lg-6">
+                    <div class="section-heading">
+                        <h6>User Management</h6>
+                        <h2>Daftar Pengguna</h2>
+                    </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <a href="#">
-                        <div class="item">
-                            <div class="image">
-                                <img src="assets/images/featured-02.png" alt="" style="max-width: 44px;">
-                            </div>
-                            <h4>User More</h4>
-                        </div>
-                    </a>
+                <div class="col-lg-6">
+                    <div class="main-button">
+                        <a href="{{ route('user.create') }}">+ Tambah User Baru</a>
+                    </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <a href="#">
+
+                @forelse($users as $u)
+                    <div class="col-lg-3 col-md-6 mb-4">
                         <div class="item">
-                            <div class="image">
-                                <img src="assets/images/featured-03.png" alt="" style="max-width: 44px;">
+                            <div class="thumb">
+                                <a href="{{ route('user.show', $u->id) }}">
+                                    {{-- Placeholder gambar profil --}}
+                                    <img src="{{ asset('assets/images/user.png') }}" alt="">
+                                </a>
+                                {{-- Menampilkan Role sebagai badge (Warna merah untuk admin, abu-abu untuk user) --}}
+                                <span class="price" style="background-color: {{ $u->role == 'admin' ? '#ee626b' : '#444' }}; font-size: 11px;">
+                                    {{ strtoupper($u->role) }}
+                                </span>
                             </div>
-                            <h4>Reply Ready</h4>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <a href="#">
-                        <div class="item">
-                            <div class="image">
-                                <img src="assets/images/featured-04.png" alt="" style="max-width: 44px;">
+                            <div class="down-content">
+                                {{-- Menampilkan Email sebagai sub-title --}}
+                                <span class="category">{{ $u->email }}</span>
+                                <h4 title="{{ $u->name }}">{{ Str::limit($u->name, 18) }}</h4>
+
+                                {{-- Informasi Tambahan (Tanggal Bergabung) --}}
+                                <p style="color: #aaa; font-size: 13px; margin-bottom: 15px; min-height: 40px;">
+                                    <i class="fa fa-calendar" style="color: #ee626b;"></i> 
+                                    Joined: {{ $u->created_at->format('d M Y') }}
+                                </p>
+
+                                <div class="action-buttons-wrapper d-flex justify-content-center align-items-center gap-2 mt-3 pt-3"
+                                    style="border-top: 1px solid #444;">
+
+                                    <a href="{{ route('user.show', $u->id) }}" class="btn-round btn-detail" title="Detail">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+
+                                    <a href="{{ route('user.edit', $u->id) }}" class="btn-round btn-edit" title="Edit">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+
+                                    {{-- Form Hapus (Hanya muncul jika bukan user yang sedang login sendiri) --}}
+                                    @if(Auth::id() !== $u->id)
+                                        <form action="{{ route('user.destroy', $u->id) }}" method="POST"
+                                            onsubmit="return confirm('Hapus akun ini?')" class="m-0 d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn-round btn-delete" title="Hapus">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    @endif
+                                </div>
                             </div>
-                            <h4>Easy Layout</h4>
                         </div>
-                    </a>
-                </div>
+                    </div>
+                @empty
+                    <div class="col-lg-12">
+                        <div class="item text-center" style="padding: 50px; background-color: #2a2a2a; border-radius: 25px;">
+                            <i class="fa fa-users" style="font-size: 50px; color: #ee626b; margin-bottom: 20px;"></i>
+                            <h4 style="color: #fff;">Belum ada user terdaftar</h4>
+                            <p style="color: #aaa;">Klik "+ Tambah User Baru" untuk mengelola akses aplikasi.</p>
+                        </div>
+                    </div>
+                @endforelse
             </div>
         </div>
     </div>
@@ -97,7 +132,7 @@
                         <div class="item">
                             <div class="thumb">
                                 <a href="{{ route('warga.show', $w->warga_id) }}">
-                                    <img src="{{ asset('assets/images/trending-01.jpg') }}" alt="">
+                                    <img src="{{ asset('assets/images/user.png') }}" alt="">
                                 </a>
                                 <span class="price">ID: {{ $w->warga_id }}</span>
                             </div>
@@ -163,7 +198,7 @@
                         <div class="item">
                             <div class="thumb">
                                 <a href="{{ route('kategori.show', $k->kategori_id) }}">
-                                    <img src="{{ asset('assets/images/top-game-01.jpg') }}" alt="">
+                                    <img src="{{ asset('assets/images/plc.png') }}" alt="">
                                 </a>
                                 <span class="price" style="background-color: #ee626b; font-size: 12px;">{{ $k->kode }}</span>
                             </div>
@@ -233,7 +268,7 @@
                             <div class="thumb">
                                 <a href="{{ route('aset.show', $a->aset_id) }}">
                                     {{-- Gambar disesuaikan dengan tema game --}}
-                                    <img src="{{ asset('assets/images/trending-02.jpg') }}" alt="">
+                                    <img src="{{ asset('assets/images/plc.png') }}" alt="">
                                 </a>
                                 <span class="price" style="background-color: #ee626b;">{{ $a->kode_aset }}</span>
                             </div>
@@ -303,7 +338,7 @@
                         <div class="item">
                             <div class="thumb">
                                 <a href="{{ route('lokasi.show', $l->lokasi_id) }}">
-                                    <img src="{{ asset('assets/images/trending-03.jpg') }}" alt="">
+                                    <img src="{{ asset('assets/images/plc.png') }}" alt="">
                                 </a>
                                 {{-- Menampilkan RT/RW sebagai badge di pojok gambar --}}
                                 <span class="price" style="background-color: #ee626b; font-size: 11px;">
@@ -378,7 +413,7 @@
                             <div class="thumb">
                                 <a href="{{ route('pemeliharaan.show', $p->pemeliharaan_id) }}">
                                     {{-- Gambar placeholder bertema teknis/tools --}}
-                                    <img src="{{ asset('assets/images/top-game-04.jpg') }}" alt="">
+                                    <img src="{{ asset('assets/images/plc.png') }}" alt="">
                                 </a>
                                 {{-- Menampilkan Biaya di pojok gambar --}}
                                 <span class="price" style="background-color: #ee626b; font-size: 11px;">
@@ -456,7 +491,7 @@
                             <div class="thumb">
                                 <a href="{{ route('mutasi.show', $m->mutasi_id) }}">
                                     {{-- Placeholder gambar bertema perpindahan/box --}}
-                                    <img src="{{ asset('assets/images/trending-02.jpg') }}" alt="">
+                                    <img src="{{ asset('assets/images/plc.png') }}" alt="">
                                 </a>
                                 {{-- Menampilkan Tanggal Mutasi sebagai badge di pojok gambar --}}
                                 <span class="price" style="background-color: #ee626b; font-size: 11px;">
@@ -511,45 +546,68 @@
         </div>
     </div>
 
-    <div class="section cta">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5">
-                    <div class="shop">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="section-heading">
-                                    <h6>Our Shop</h6>
-                                    <h2>Go Pre-Order Buy & Get Best <em>Prices</em> For You!</h2>
-                                </div>
-                                <p>Lorem ipsum dolor consectetur adipiscing, sed do eiusmod tempor incididunt.</p>
-                                <div class="main-button">
-                                    <a href="shop.html">Shop Now</a>
-                                </div>
-                            </div>
+    <div class="container mt-5 mb-5">
+    <div class="developer-card" style="background: #ffffff; border-radius: 30px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.08); border: none;">
+        <div class="row g-0">
+            <div class="col-lg-4" style="background: linear-gradient(180deg, #0d6efd 0%, #0043a8 100%); padding: 50px 30px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                <div class="profile-frame" style="padding: 10px; background: rgba(255,255,255,0.2); border-radius: 40px; backdrop-filter: blur(10px); margin-bottom: 25px;">
+                    <img src="{{ asset('assets/images/kaye.jpeg') }}" alt="Rifqi Al Shirazi" 
+                         style="width: 200px; height: 260px; object-fit: cover; border-radius: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
+                </div>
+                
+                <div class="social-links-vertical d-flex flex-row flex-lg-column gap-3">
+                    <a href="https://wa.me/08117774714" class="social-icon-modern"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.linkedin.com/in/rifqi-alshirazi-01a1063a1" class="social-icon-modern"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/rifqi24si-cmd" class="social-icon-modern"><i class="fab fa-github"></i></a>
+                    <a href="https://www.instagram.com/rifkyysh?igsh=dGluajcyeHlnMzZ6&utm_source=qr" class="social-icon-modern"><i class="fab fa-instagram"></i></a>
+                    <a href="https://youtube.com/@rifqialshirazi?si=Y5rV5WkerITbfQ_0" class="social-icon-modern"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="col-lg-8" style="padding: 60px;">
+                <div class="badge mb-3" style="background: rgba(13, 110, 253, 0.1); color: #0d6efd; padding: 8px 16px; border-radius: 50px; font-weight: 600;">PENGEMBANG SISTEM</div>
+                
+                <h1 style="font-weight: 800; color: #1a1a1a; font-size: 3.5rem; line-height: 1.1; margin-bottom: 10px;">
+                    Rifqi Al Shirazi
+                </h1>
+                <p style="color: #6c757d; font-size: 1.2rem; font-weight: 400; margin-bottom: 40px;">
+                    Mahasiswa Sistem Informasi <span style="color: #0d6efd; margin: 0 10px;">|</span> Politeknik Caltex Riau
+                </p>
+
+                <div class="info-grid-modern">
+                    <div class="info-item-modern">
+                        <div class="icon-wrap"><i class="fa fa-id-card"></i></div>
+                        <div class="text-wrap">
+                            <small>NIM</small>
+                            <strong>2457301123</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item-modern">
+                        <div class="icon-wrap"><i class="fa fa-graduation-cap"></i></div>
+                        <div class="text-wrap">
+                            <small>Generasi</small>
+                            <strong>G24 (2024)</strong>
+                        </div>
+                    </div>
+
+                    <div class="info-item-modern full-width">
+                        <div class="icon-wrap"><i class="fa fa-envelope"></i></div>
+                        <div class="text-wrap">
+                            <small>Email Institusi</small>
+                            <strong>rifqi24si@mahasiswa.pcr.ac.id</strong>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-5 offset-lg-2 align-self-end">
-                    <div class="subscribe">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="section-heading">
-                                    <h6>NEWSLETTER</h6>
-                                    <h2>Get Up To $100 Off Just Buy <em>Subscribe</em> Newsletter!</h2>
-                                </div>
-                                <div class="search-input">
-                                    <form id="subscribe" action="#">
-                                        <input type="email" class="form-control" id="exampleInputEmail1"
-                                            aria-describedby="emailHelp" placeholder="Your email...">
-                                        <button type="submit">Subscribe Now</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+                <div class="mt-5 pt-4" style="border-top: 1px solid #f0f0f0;">
+                    <p style="color: #888; font-style: italic; font-size: 0.95rem;">
+                        "Fokus pada pengembangan solusi digital yang efisien untuk manajemen aset modern."
+                    </p>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
 @endsection
