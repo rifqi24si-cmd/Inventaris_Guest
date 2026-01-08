@@ -27,7 +27,11 @@
         </div>
     </div>
     <!-- ***** Preloader End ***** -->
-
+    <a href="https://wa.me/628117774714?text=Halo%20Rifqi,%20saya%20ingin%20bertanya%20tentang%20sistem%20manajemen%20aset."
+        class="floating-wa" target="_blank">
+        <div class="wa-text">Hubungi Saya</div>
+        <i class="fab fa-whatsapp"></i>
+    </a>
     @include('layouts.guest.navbar')
 
     @yield('content')

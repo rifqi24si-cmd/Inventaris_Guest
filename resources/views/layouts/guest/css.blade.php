@@ -347,4 +347,92 @@
             grid-column: span 1;
         }
     }
+
+    .floating-wa {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        bottom: 40px;
+        right: 40px;
+        background-color: #25d366;
+        color: #FFF;
+        border-radius: 50px;
+        text-align: center;
+        font-size: 30px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    /* Efek Berdenyut (Pulse) */
+    .floating-wa::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #25d366;
+        border-radius: 50%;
+        z-index: -1;
+        animation: wa-pulse 2s infinite;
+    }
+
+    @keyframes wa-pulse {
+        0% {
+            transform: scale(1);
+            opacity: 0.7;
+        }
+
+        100% {
+            transform: scale(1.6);
+            opacity: 0;
+        }
+    }
+
+    /* Label Teks di Samping (Muncul saat Hover) */
+    .wa-text {
+        position: absolute;
+        right: 70px;
+        background: white;
+        color: #444;
+        padding: 8px 15px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .floating-wa:hover .wa-text {
+        opacity: 1;
+        visibility: visible;
+        right: 80px;
+    }
+
+    .floating-wa:hover {
+        transform: scale(1.1);
+        color: white;
+    }
+
+    /* Responsif untuk Mobile */
+    @media (max-width: 768px) {
+        .floating-wa {
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            font-size: 25px;
+        }
+
+        .wa-text {
+            display: none;
+            /* Sembunyikan teks di HP agar tidak memenuhi layar */
+        }
+    }
 </style>
