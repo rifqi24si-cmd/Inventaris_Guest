@@ -354,6 +354,80 @@
         </div>
     </div>
 
+    <div class="section most-played">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="section-heading">
+                        <h6>Maintenance Records</h6>
+                        <h2>Pemeliharaan Aset</h2>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="main-button">
+                        <a href="{{ route('pemeliharaan.create') }}">+ Catat Pemeliharaan</a>
+                    </div>
+                </div>
+
+                @forelse($pemeliharaans as $p)
+                    <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
+                        <div class="item">
+                            <div class="thumb">
+                                <a href="{{ route('pemeliharaan.show', $p->pemeliharaan_id) }}">
+                                    {{-- Gambar placeholder bertema teknis/tools --}}
+                                    <img src="{{ asset('assets/images/top-game-04.jpg') }}" alt="">
+                                </a>
+                                {{-- Menampilkan Biaya di pojok gambar --}}
+                                <span class="price" style="background-color: #ee626b; font-size: 11px;">
+                                    Rp {{ number_format($p->biaya, 0, ',', '.') }}
+                                </span>
+                            </div>
+                            <div class="down-content">
+                                {{-- Menampilkan Nama Aset melalui relasi --}}
+                                <span class="category">{{ $p->aset->nama_aset }}</span>
+                                <h4 title="{{ $p->tindakan }}">{{ Str::limit($p->tindakan, 20) }}</h4>
+
+                                <p style="color: #666; font-size: 13px; min-height: 40px;">
+                                    <i class="fa fa-calendar" style="color: #ee626b;"></i> {{ \Carbon\Carbon::parse($p->tanggal)->format('d/m/Y') }}<br>
+                                    <i class="fa fa-user" style="color: #ee626b;"></i> Pelaksana: {{ $p->pelaksana }}
+                                </p>
+
+                                <div class="action-buttons-wrapper d-flex flex-row justify-content-center align-items-center gap-2"
+                                    style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px;">
+
+                                    <a href="{{ route('pemeliharaan.show', $p->pemeliharaan_id) }}" class="btn-round btn-view" title="Detail">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+
+                                    <a href="{{ route('pemeliharaan.edit', $p->pemeliharaan_id) }}" class="btn-round btn-edit" title="Edit">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+
+                                    <form action="{{ route('pemeliharaan.destroy', $p->pemeliharaan_id) }}" method="POST"
+                                        onsubmit="return confirm('Hapus log pemeliharaan ini?')" style="display: inline-block; margin: 0;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn-round btn-delete" title="Hapus">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-lg-12">
+                        <div class="item text-center" style="padding: 50px; background-color: #2a2a2a; border-radius: 25px;">
+                            <i class="fa fa-wrench" style="font-size: 50px; color: #ee626b; margin-bottom: 20px;"></i>
+                            <h4 style="color: #fff;">Belum ada catatan pemeliharaan</h4>
+                            <p style="color: #aaa;">Klik "+ Catat Pemeliharaan" untuk mendokumentasikan perbaikan aset.</p>
+                        </div>
+                    </div>
+                @endforelse
+            </div>
+        </div>
+    </div>
+
     <div class="section cta">
         <div class="container">
             <div class="row">
