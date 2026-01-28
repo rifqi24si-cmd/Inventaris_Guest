@@ -13,6 +13,9 @@
                     <ul class="nav">
                         <li><a href="{{ url('/') }}" class="{{ Request::is('/') ? 'active' : '' }}">Beranda</a></li>
                         <li><a href="/tentang" class="{{ Request::is('tentang*') ? 'active' : '' }}">Tentang</a></li>
+                        <li><a href="/kontak" class="{{ Request::is('kontak*') ? 'active' : '' }}">Kontak</a></li>
+                         <li><a href="/pelaporan/asset" class="{{ Request::is('pelaporan/asset*') ? 'active' : '' }}">Pelaporan Asset</a></li>
+                        
                         
                         @auth
                             <li class="dropdown-container">
