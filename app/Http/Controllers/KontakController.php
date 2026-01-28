@@ -11,7 +11,7 @@ class KontakController extends Controller
     public function index()
     {
         $kontak = Kontak::all();
-        return view('pages.Kontak.index', compact('kontak'));
+        return view('pages.Kontak.Index', compact('kontak'));
     }
 
   
